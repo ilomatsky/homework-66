@@ -22,24 +22,26 @@ const MealForm: React.FC<MealFormProps> = ({onSave}) => {
   };
 
   return (
-    <div>
+    <form>
       <label>Time:</label>
-      <select value={time} onChange={(e) => setTime(e.target.value)}>
+      <select required value={time} onChange={(e) => setTime(e.target.value)}>
+        <option value="" disabled>Select a category</option>
         <option value="Breakfast">Breakfast</option>
         <option value="Snack">Snack</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
       </select>
       <label>Description:</label>
-      <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
+      <input required type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
       <label>Calories:</label>
       <input
+        required
         type="number"
         value={calories}
         onChange={(e) => setCalories(e.target.value)}
       />
       <button onClick={handleSave}>Save</button>
-    </div>
+    </form>
   );
 };
 

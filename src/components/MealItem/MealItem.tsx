@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Meal, MealItemProps} from '../../types';
 
-const MealItem: React.FC<MealItemProps> = ({meal, onDelete, onSave}) => {
+const MealItem: React.FC<MealItemProps> = ({meal, onDelete, onSave, isDisabled}) => {
   const [editing, setEditing] = useState<boolean>(false);
   const [editedMeal, setEditedMeal] = useState<Meal>({...meal});
 
@@ -11,6 +11,11 @@ const MealItem: React.FC<MealItemProps> = ({meal, onDelete, onSave}) => {
 
   const handleSaveClick = () => {
     onSave(editedMeal);
+    setEditing(false);
+  };
+
+  const handleCancelClick = () => {
+    setEditedMeal({...meal});
     setEditing(false);
   };
 
@@ -24,6 +29,7 @@ const MealItem: React.FC<MealItemProps> = ({meal, onDelete, onSave}) => {
               value={editedMeal.time}
               onChange={(e) => setEditedMeal({...editedMeal, time: e.target.value})}
             >
+              <option value="" disabled>Select a category</option>
               <option value="Breakfast">Breakfast</option>
               <option value="Snack">Snack</option>
               <option value="Lunch">Lunch</option>
@@ -42,14 +48,19 @@ const MealItem: React.FC<MealItemProps> = ({meal, onDelete, onSave}) => {
               onChange={(e) => setEditedMeal({...editedMeal, calories: +e.target.value})}
             />
             <button onClick={handleSaveClick}>Save</button>
+            <button onClick={handleCancelClick}>Cancel</button>
           </div>
         ) : (
           <div>
             <p>Time: {meal.time}</p>
             <p>Description: {meal.description}</p>
             <p>Calories: {meal.calories}</p>
-            <button onClick={handleEditClick}>Edit</button>
-            <button onClick={onDelete}>Delete</button>
+            <button onClick={handleEditClick} disabled={isDisabled}>
+              Edit
+            </button>
+            <button onClick={onDelete} disabled={isDisabled}>
+              Delete
+            </button>
           </div>
         )}
       </div>

@@ -43,7 +43,7 @@ const App: React.FC = () => {
       setLoading(true);
       await axiosApi.delete(`/meals/${mealId}.json`);
       setMeals(meals.filter((meal) => meal.id !== mealId));
-      updateTotalCalories(meals);
+      updateTotalCalories(meals.filter((meal) => meal.id !== mealId));
     } catch (error) {
       console.error('Error deleting meal:', error);
     } finally {
@@ -78,7 +78,7 @@ const App: React.FC = () => {
           </div>
         </div>
       ) : (
-        <MealList meals={meals} onDelete={handleDeleteMeal} onSave={handleSaveMeal}/>
+        <MealList meals={meals} onDelete={handleDeleteMeal} onSave={handleSaveMeal} loading={loading}/>
       )}
     </div>
   );
