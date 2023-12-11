@@ -22,26 +22,45 @@ const MealForm: React.FC<MealFormProps> = ({onSave}) => {
   };
 
   return (
-    <form>
-      <label>Time:</label>
-      <select required value={time} onChange={(e) => setTime(e.target.value)}>
-        <option value="" disabled>Select a category</option>
-        <option value="Breakfast">Breakfast</option>
-        <option value="Snack">Snack</option>
-        <option value="Lunch">Lunch</option>
-        <option value="Dinner">Dinner</option>
-      </select>
-      <label>Description:</label>
-      <input required type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
-      <label>Calories:</label>
-      <input
-        required
-        type="number"
-        value={calories}
-        onChange={(e) => setCalories(e.target.value)}
-      />
-      <button onClick={handleSave}>Save</button>
-    </form>
+    <div className="col-6 mx-auto">
+      <form className="card p-3">
+        <div className="form-group mb-3">
+          <label className="form-label">Time:</label>
+          <select
+            className="form-select"
+            required
+            value={time}
+            onChange={(e) => setTime(e.target.value)}>
+
+            <option value="" disabled>Select a category</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Snack">Snack</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+          </select>
+        </div>
+        <div className="form-group mb-3">
+          <label className="form-label">Description:</label>
+          <input
+            className="form-control"
+            required
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}/>
+        </div>
+        <div className="form-group mb-4">
+          <label>Calories:</label>
+          <input
+            className="form-control"
+            required
+            type="number"
+            value={calories}
+            onChange={(e) => setCalories(parseInt(e.target.value))}
+          />
+        </div>
+        <button className="btn btn-primary" onClick={handleSave}>Save</button>
+      </form>
+    </div>
   );
 };
 

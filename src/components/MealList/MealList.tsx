@@ -4,7 +4,7 @@ import {MealListProps} from '../../types';
 
 const MealList: React.FC<MealListProps> = ({meals, onDelete, onSave, loading}) => {
   return (
-    <div>
+    <div className="col-6">
       {meals.map((meal) => (
         <MealItem
           key={meal.id}

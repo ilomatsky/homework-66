@@ -69,17 +69,19 @@ const App: React.FC = () => {
 
   return (
     <div className="container mt-5">
-      <h1>Total Calories: {totalCalories}</h1>
-      <MealForm onSave={handleSaveMeal}/>
-      {loading ? (
-        <div className="text-center">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
+      <h1 className="mb-4">Total Calories: {totalCalories}</h1>
+      <div className="row">
+        <MealForm onSave={handleSaveMeal}/>
+        {loading ? (
+          <div className="text-center col-6">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
-        </div>
-      ) : (
-        <MealList meals={meals} onDelete={handleDeleteMeal} onSave={handleSaveMeal} loading={loading}/>
-      )}
+        ) : (
+          <MealList meals={meals} onDelete={handleDeleteMeal} onSave={handleSaveMeal} loading={loading}/>
+        )}
+      </div>
     </div>
   );
 };
